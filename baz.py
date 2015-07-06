@@ -8,12 +8,13 @@ soup = BeautifulSoup(r.text, 'lxml')
 ads = soup.find_all('ul', id=re.compile('id\d+'))
 
 for ad in ads:
-    print ad.attrs['id']
+    ad_id = ad.attrs['id'].replace('id', '')
     adt = ad.getText()
     adt = re.sub(r'\s+', ' ', adt).replace('Lokal do Wynajecia', '').replace(' - ', '\n').strip()
     if not adt[0].isdigit():
         continue
     print adt
+    print 'http://bazarynka.com/ogloszenia/telefon/%s/ktory/1' % ad_id
     print
 
 
