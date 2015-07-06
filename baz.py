@@ -27,11 +27,20 @@ for ad in ads:
     if name != None:
         name = name.group(1)        
     
+    adt = re.sub(r'<more>.*', '', adt)    
     
-    adt = re.sub(r'<more>.*', '', adt)
-    print date, name, price
-    print adt
-    print 'http://bazarynka.com/ogloszenia/telefon/%s/ktory/1' % ad_id
+    if adt[:90].find(' - ') != -1:
+        adts = adt.split(' - ')
+        location = adts[0]
+        adt = adts[1]
+    else:
+        location = ''
+    phone = 'http://bazarynka.com/ogloszenia/telefon/%s/ktory/1' % ad_id
+    
+    title = adt[:100]
+    
+    print "%s\n%s $%s" % (title, location, price)
     print
+
 
 
